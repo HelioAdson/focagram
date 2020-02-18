@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { login } from "../services/api";
 
 const Login = () => {
   const [loading, setLoading] = useState(false)
@@ -14,6 +15,7 @@ const Login = () => {
       if(!element.name) continue;
       data[element.name] = element.value;
     }
+    login(data).finally(()=> setLoading(false))
     setTimeout(()=> setLoading(false),1000)
 }
   
@@ -24,7 +26,7 @@ const Login = () => {
       <label>Email</label>
       <input type="email" name="email" />
       <labe>Password</labe>
-      <input type="password" name="pass" />
+      <input type="password" name="password" />
       <button type="submit">Login</button>
       {loading && <p>Loading...</p>}    
     </form>
